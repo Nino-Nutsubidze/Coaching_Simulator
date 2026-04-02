@@ -265,10 +265,13 @@ async function sendMsg(forceText){
   if(!cur) return;
   const text=(forceText || inp.value || '').trim();
   if(!text) return;
-  stopMic(true,false);
+  stopMic(true,true);
   addUser(text);
   hist.push({role:'user',content:text});
-  inp.value=''; inp.style.height='46px'; finalTranscript=''; interimTranscript='';
+  inp.value='';
+  inp.style.height='46px';
+  finalTranscript='';
+  interimTranscript='';
   updateSignals(text);
   const userTurns=hist.filter(x=>x.role==='user').length;
   stagePill.textContent=stageLabel(userTurns);
@@ -381,15 +384,76 @@ function pickVoice(gender){ const voices=speechSynthesis.getVoices(); const fema
 function stopSpeaking(){ if(window.speechSynthesis.speaking) window.speechSynthesis.cancel(); document.querySelectorAll('.spk.playing').forEach(b=>b.classList.remove('playing')); }
 function speakText(text,gender,btn){ if(window.speechSynthesis.speaking){ stopSpeaking(); } const u=new SpeechSynthesisUtterance(text); const voice=pickVoice(gender); if(voice) u.voice=voice; btn.classList.add('playing'); u.onend=()=>btn.classList.remove('playing'); u.onerror=()=>btn.classList.remove('playing'); window.speechSynthesis.speak(u); }
 speechSynthesis.onvoiceschanged=()=>{};
-function stopMic(silent, clearInput){ if(rec){ try{ rec.onend=null; rec.stop(); if(rec.abort) rec.abort(); }catch(e){} } rec=null; micOn=false; micBtn.classList.remove('on'); if(clearInput){ finalTranscript=''; interimTranscript=''; inp.value=''; autoGrow(); } if(!silent) inp.focus(); }
+function stopMic(silent, clearInput){
+  if(rec){
+    try{
+      rec.onresult = null;
+      rec.onend = null;
+      rec.onerror = null;
+      rec.stop();
+      if(rec.abort) rec.abort();
+    }catch(e){}
+  }
+  rec = null;
+  micOn = false;
+  micBtn.classList.remove('on');
+  if(clearInput){
+    finalTranscript = '';
+    interimTranscript = '';
+    inp.value = '';
+    autoGrow();
+  }
+  if(!silent) inp.focus();
+}
 function formatTranscript(text){ let t=(text||'').trim().replace(/\s+/g,' '); if(!t) return ''; t=t.charAt(0).toUpperCase()+t.slice(1); if(!/[.!?]$/.test(t)) t+='.'; return t; }
 function toggleMic(){
-  if(!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)){ alert('Microphone is not supported in this browser.'); return; }
-  if(micOn){ const finalText=formatTranscript((finalTranscript+' '+interimTranscript).trim()); stopMic(true,true); inp.value=finalText; autoGrow(); return; }
-  stopSpeaking(); finalTranscript=''; interimTranscript=''; const SR=window.SpeechRecognition || window.webkitSpeechRecognition; rec=new SR(); rec.lang='en-US'; rec.continuous=true; rec.interimResults=true; micOn=true; micBtn.classList.add('on');
-  rec.onresult=(e)=>{ interimTranscript=''; for(let i=e.resultIndex;i<e.results.length;i++){ const piece=e.results[i][0].transcript.trim(); if(e.results[i].isFinal){ finalTranscript=(finalTranscript+' '+piece).trim(); } else { interimTranscript=(interimTranscript+' '+piece).trim(); } } inp.value=[finalTranscript,interimTranscript].filter(Boolean).join(' ').trim(); autoGrow(); };
-  rec.onerror=()=>stopMic(true,false);
-  rec.onend=()=>{ if(micOn){ try{ rec.start(); }catch(e){} } };
+  if(!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)){
+    alert('Microphone is not supported in this browser.');
+    return;
+  }
+  if(micOn){
+    const finalText = formatTranscript((finalTranscript + ' ' + interimTranscript).trim());
+    stopMic(true,true);
+    inp.value = finalText;
+    autoGrow();
+    return;
+  }
+
+  stopSpeaking();
+  finalTranscript = '';
+  interimTranscript = '';
+  inp.value = '';
+  autoGrow();
+
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  rec = new SR();
+  rec.lang = 'en-US';
+  rec.continuous = true;
+  rec.interimResults = true;
+  micOn = true;
+  micBtn.classList.add('on');
+
+  rec.onresult = (e) => {
+    if(!micOn) return;
+    interimTranscript = '';
+    for(let i = e.resultIndex; i < e.results.length; i++){
+      const piece = e.results[i][0].transcript.trim();
+      if(e.results[i].isFinal){
+        finalTranscript = (finalTranscript + ' ' + piece).trim();
+      } else {
+        interimTranscript = (interimTranscript + ' ' + piece).trim();
+      }
+    }
+    inp.value = [finalTranscript, interimTranscript].filter(Boolean).join(' ').trim();
+    autoGrow();
+  };
+
+  rec.onerror = () => stopMic(true,false);
+  rec.onend = () => {
+    if(micOn){
+      try{ rec.start(); }catch(e){}
+    }
+  };
   rec.start();
 }
 renderCards();
