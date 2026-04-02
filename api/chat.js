@@ -1,15 +1,9 @@
 export async function GET(req) {
   const url = new URL(req.url);
   if (url.searchParams.get('ping') === '1') {
-    return new Response(JSON.stringify({ ok: true }), {
-      status: 200,
-      headers: { 'content-type': 'application/json' }
-    });
+    return new Response(JSON.stringify({ ok: true }), { status: 200, headers: { 'content-type': 'application/json' } });
   }
-  return new Response(JSON.stringify({ ok: true, route: '/api/chat' }), {
-    status: 200,
-    headers: { 'content-type': 'application/json' }
-  });
+  return new Response(JSON.stringify({ ok: true, route: '/api/chat' }), { status: 200, headers: { 'content-type': 'application/json' } });
 }
 
 export async function POST(req) {
@@ -39,11 +33,8 @@ export async function POST(req) {
 
     const txt = await resp.text();
     let parsed;
-    try {
-      parsed = JSON.parse(txt);
-    } catch {
-      parsed = { raw: txt };
-    }
+    try { parsed = JSON.parse(txt); }
+    catch { parsed = { raw: txt }; }
 
     if (!resp.ok) {
       return new Response(JSON.stringify({
