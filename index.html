@@ -322,31 +322,63 @@ async function sendMsg(forceText){
   const text=(forceText || inp.value || '').trim();
   if(!text) return;
   stopMic(true,false);
-  addUser(text); hist.push({role:'user',content:text}); inp.value=''; inp.style.height='46px'; finalTranscript=''; interimTranscript='';
-  updateSignals(text); stagePill.textContent=stageLabel(hist.filter(x=>x.role==='user').length); showTyping();
+  addUser(text);
+  hist.push({role:'user',content:text});
+  inp.value='';
+  inp.style.height='46px';
+  finalTranscript='';
+  interimTranscript='';
+  updateSignals(text);
+  const userTurns = hist.filter(x=>x.role==='user').length;
+  stagePill.textContent=stageLabel(userTurns);
+  showTyping();
   try{
+    const convo = hist.map((m,idx)=>`${m.role==='assistant'?cur.aiRole:'Manager'}: ${m.content}`).join('\n\n');
+    const system = `${cur.systemPrompt}
+
+SIMULATION CONTEXT:
+- Week: 9
+- Theme: Coaching and High Performance
+- Employee: ${cur.aiRole}
+- Role profile: ${cur.roleDesc}
+- Situation: ${cur.situation}
+- Manager objective: ${cur.objective}
+- 4C dimensions tested: ${cur.dims.join(', ')}
+- Current stage: ${stageLabel(userTurns)}
+- Trust: ${signals.trust}%
+- Resistance: ${signals.resistance}%
+- Coaching readiness: ${signals.readiness}%
+
+RESPONSE RULES:
+- Stay fully in character as ${cur.aiRole}.
+- Give smart, logical, realistic Floward-specific responses.
+- React to the manager's exact words, not generic coaching cliches.
+- Do not agree too quickly.
+- If the manager rescues, stays vague, or talks in slogans, push back or stay unconvinced.
+- If the manager asks thoughtful coaching questions and creates clarity, open up gradually.
+- Reveal concerns progressively rather than all at once.
+- Keep replies to 2-4 concise natural sentences.
+- Never sound like an AI assistant or trainer.
+
+Use the conversation so far to continue naturally:
+${convo}`;
     const body={
       model:"claude-3-5-sonnet-latest",
-      max_tokens:550,
-      system: cur.systemPrompt + `
-
-You are in a Week 9 Floward coaching simulation.
-Core rules:
-- Stay fully in character.
-- Reply with logical, smart, realistic coaching responses.
-- Do not agree too quickly.
-- Reward real coaching questions, ownership-building, and specificity.
-- Challenge vague reassurance, instant problem-solving, and soft avoidance.
-- Keep replies to 2-4 concise natural sentences.
-- Sound like a real Floward employee in a coaching conversation, not a generic chatbot.`,
+      max_tokens:450,
+      system,
       messages: hist.map(m=>({role:m.role==='assistant'?'assistant':'user', content:m.content}))
     };
     const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-    const data=await res.json(); hideTyping();
+    const data=await res.json();
+    hideTyping();
     const reply=data.content?.[0]?.text || data.reply || 'I still need a clearer coaching response from you. Can you be more specific?';
-    addAI(cur.aiRole, reply, cur.voiceGender); hist.push({role:'assistant',content:reply}); setApiStatus('AI connected · Ready');
+    addAI(cur.aiRole, reply, cur.voiceGender);
+    hist.push({role:'assistant',content:reply});
+    setApiStatus('AI connected · Ready');
   }catch(e){
-    hideTyping(); addAI(cur.aiRole,'I still need a clearer coaching response from you. Can you be more specific?',cur.voiceGender); setApiStatus('Connection issue');
+    hideTyping();
+    addAI(cur.aiRole,'I still need a clearer coaching response from you. Can you be more specific?',cur.voiceGender);
+    setApiStatus('Connection issue');
   }
 }
 function autoGrow(){ inp.style.height='46px'; inp.style.height=Math.min(inp.scrollHeight,120)+'px'; }
@@ -425,7 +457,8 @@ function toggleMic(){
   if(micOn){
     const finalText=formatTranscript((finalTranscript+' '+interimTranscript).trim());
     stopMic(true,true);
-    if(finalText){ sendMsg(finalText); }
+    inp.value = finalText;
+    autoGrow();
     return;
   }
   stopSpeaking();
