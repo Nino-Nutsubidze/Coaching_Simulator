@@ -6,24 +6,12 @@
 <title>Week 9 AI Coaching Simulator | Rise to Lead</title>
 <style>
 :root{
-  --deep:#00313C;
-  --mid:#074E59;
-  --teal:#005D67;
-  --peach:#F1CEB3;
-  --cream:#F0E9E0;
-  --gray:#717C7D;
-  --line:rgba(255,255,255,.10);
-  --bg:#e7dfd5;
-  --card:#f7f3ee;
-  --good:#6fd4b4;
-  --warn:#ff7b6b;
-  --soft:#7ECDC8;
+  --deep:#00313C; --mid:#074E59; --teal:#005D67; --peach:#F1CEB3; --cream:#F0E9E0; --gray:#717C7D;
+  --line:rgba(255,255,255,.10); --bg:#e7dfd5; --card:#f7f3ee; --good:#6fd4b4; --warn:#ff7b6b;
 }
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--cream);color:var(--deep)}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--cream);color:var(--deep)}
 button,input,textarea{font:inherit}
-#landing{display:block}
-.hero{background:linear-gradient(180deg,var(--deep),var(--teal));color:#fff;padding:20px 20px 0}
+#landing{display:block} .hero{background:linear-gradient(180deg,var(--deep),var(--teal));color:#fff;padding:20px 20px 0}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:10px 16px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--peach);margin-bottom:18px}
 .hero h1{margin:0;font-size:68px;line-height:.92;font-family:Georgia,serif;font-weight:700}
 .hero em{color:var(--peach);font-style:italic;font-weight:700}
@@ -51,92 +39,47 @@ button,input,textarea{font:inherit}
 .persona span{color:#72808a;font-size:14px;line-height:1.4}
 .start-btn{width:100%;background:var(--deep);color:#fff;border:none;border-radius:12px;padding:14px 16px;font-weight:800;font-size:20px;cursor:pointer}
 .start-btn:hover{filter:brightness(1.08)}
-
 #sim{display:none;height:100vh;background:var(--deep);color:#fff}
 .sim-hdr{display:flex;align-items:center;gap:14px;padding:10px 12px;background:var(--deep);border-bottom:1px solid var(--line)}
 .back{width:36px;height:36px;border:none;border-radius:10px;background:rgba(255,255,255,.08);color:#fff;font-size:24px;cursor:pointer}
-.hgroup{display:flex;flex-direction:column;gap:2px}
-.hgroup .mini{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:800}
-.hgroup .title{font-family:Georgia,serif;font-size:20px;font-weight:700}
-.h-actions{margin-left:auto;display:flex;gap:10px}
-.h-btn{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#fff;border-radius:12px;padding:10px 16px;font-weight:700;cursor:pointer}
-.h-btn.primary{background:var(--peach);color:var(--deep);border-color:transparent}
+.hgroup{display:flex;flex-direction:column;gap:2px}.hgroup .mini{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:800}.hgroup .title{font-family:Georgia,serif;font-size:20px;font-weight:700}
+.h-actions{margin-left:auto;display:flex;gap:10px}.h-btn{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#fff;border-radius:12px;padding:10px 16px;font-weight:700;cursor:pointer}.h-btn.primary{background:var(--peach);color:var(--deep);border-color:transparent}
 .subbar{background:#17606b;color:#dbeef1;padding:10px 16px;font-size:15px}
 .body{display:grid;grid-template-columns:266px 1fr 272px;height:calc(100vh - 93px)}
-.left,.right{background:#012f38;overflow:auto}
-.left{border-right:1px solid rgba(255,255,255,.08)}
-.right{background:#f5f4f2;color:var(--deep);border-left:1px solid #ddd5cc}
+.left,.right{background:#012f38;overflow:auto}.left{border-right:1px solid rgba(255,255,255,.08)} .right{background:#f5f4f2;color:var(--deep);border-left:1px solid #ddd5cc}
 .center{display:flex;flex-direction:column;background:#e5ded5;min-width:0}
 .panel-sec{padding:14px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
 .panel-lbl{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:#c5ab5f;font-weight:800;margin-bottom:10px}
 .persona-box{background:#0d3c46;border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:14px}
-.persona-box h4{margin:0 0 6px;font-size:18px}
-.persona-box p,.left p,.left li{font-size:13px;line-height:1.45;color:#d8e7ea}
+.persona-box h4{margin:0 0 6px;font-size:18px} .persona-box p,.left p,.left li{font-size:13px;line-height:1.45;color:#d8e7ea}
 .objective{font-style:italic}
-.dim-pills,.tip-list{display:flex;gap:8px;flex-wrap:wrap}
-.dim-pill{display:inline-flex;background:#245565;border-radius:999px;border:1px solid rgba(255,255,255,.10);padding:5px 10px;font-size:12px;font-weight:700}
-.signal{margin-bottom:10px}
-.signal-head{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
-.bar{height:10px;border-radius:999px;background:#113c47;overflow:hidden}
-.bar > div{height:100%;border-radius:999px}
-.tip-list{flex-direction:column;gap:6px}
-.tip{font-size:12px;color:#cde3e7;line-height:1.45}
-
-.right .panel-sec{border-bottom:1px solid #e2dace}
-.obs-title{font-family:Georgia,serif;font-size:24px;margin-bottom:4px}
-.obs-sub{font-size:13px;color:#8b989f;margin-bottom:10px}
+.dim-pills,.tip-list{display:flex;gap:8px;flex-wrap:wrap}.dim-pill{display:inline-flex;background:#245565;border-radius:999px;border:1px solid rgba(255,255,255,.10);padding:5px 10px;font-size:12px;font-weight:700}
+.signal{margin-bottom:10px}.signal-head{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}.bar{height:10px;border-radius:999px;background:#113c47;overflow:hidden}.bar>div{height:100%;border-radius:999px}
+.tip-list{flex-direction:column;gap:6px}.tip{font-size:12px;color:#cde3e7;line-height:1.45}
+.right .panel-sec{border-bottom:1px solid #e2dace}.obs-title{font-family:Georgia,serif;font-size:24px;margin-bottom:4px}.obs-sub{font-size:13px;color:#8b989f;margin-bottom:10px}
 .obs-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #ebe5dc}
 .obs-check{width:22px;height:22px;border-radius:7px;border:2px solid #c9d2d5;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;margin-top:2px;background:#fff}
 .obs-check.checked{background:#0b5d67;color:#fff;border-color:#0b5d67}
 .obs-text{font-size:12px;color:#6a7981;line-height:1.45}
 .sugg-label{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#8f9ba2;font-weight:800;margin-top:8px}
 .sugg-copy{font-size:13px;color:#8b989f;margin:6px 0 12px}
-.score-box{background:#e6ddd3;border-radius:14px;padding:16px;text-align:center}
-.score-box .big{font-size:56px;font-weight:800;line-height:1;color:var(--deep)}
-.score-box .small{font-size:13px;color:#8b989f;margin-top:6px}
-
-.msgs{flex:1;overflow:auto;padding:12px 16px}
-.msg-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:12px}
-.avatar{width:26px;height:26px;border-radius:8px;background:#073f49;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex:0 0 auto}
-.msg-wrap{max-width:72%}
-.msg-name{font-size:11px;color:#748792;font-weight:700;margin-bottom:3px}
-.msg-bubble{background:#fff;border-radius:14px;padding:10px 12px;color:#334247;line-height:1.48;font-size:14px;position:relative}
-.msg.user{display:flex;justify-content:flex-end}
-.msg.user .msg-wrap{max-width:72%}
-.msg.user .msg-bubble{background:#00313C;color:#fff}
-.msg.user .msg-name{text-align:right;color:#7c929c}
-.spk{border:none;background:none;color:#9db6bf;cursor:pointer;margin-left:8px;font-size:14px}
-.spk.playing{color:#0b5d67}
+.score-box{background:#e6ddd3;border-radius:14px;padding:16px;text-align:center}.score-box .big{font-size:56px;font-weight:800;line-height:1;color:var(--deep)}.score-box .small{font-size:13px;color:#8b989f;margin-top:6px}
+.msgs{flex:1;overflow:auto;padding:12px 16px}.msg-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:12px}.avatar{width:26px;height:26px;border-radius:8px;background:#073f49;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex:0 0 auto}
+.msg-wrap{max-width:72%}.msg-name{font-size:11px;color:#748792;font-weight:700;margin-bottom:3px}.msg-bubble{background:#fff;border-radius:14px;padding:10px 12px;color:#334247;line-height:1.48;font-size:14px;position:relative}
+.msg.user{display:flex;justify-content:flex-end}.msg.user .msg-bubble{background:#00313C;color:#fff}.msg.user .msg-name{text-align:right;color:#7c929c}
+.spk{border:none;background:none;color:#9db6bf;cursor:pointer;margin-left:8px;font-size:14px}.spk.playing{color:#0b5d67}
 .typing{display:none;padding:10px 12px;background:#fff;border-radius:14px;font-size:14px;color:#7b8c93;width:max-content}
-.input-wrap{background:#f2efeb;border-top:1px solid #dbd2c6;padding:10px 12px}
-.input-row{display:flex;gap:8px;align-items:center}
+.input-wrap{background:#f2efeb;border-top:1px solid #dbd2c6;padding:10px 12px}.input-row{display:flex;gap:8px;align-items:center}
 .icon-btn{width:38px;height:38px;border-radius:10px;border:none;background:#ddd5cc;color:#34515c;cursor:pointer}
 .icon-btn.on{background:#c95e4a;color:#fff}
 #inp{flex:1;background:#f5f1eb;border:1.5px solid #d1a457;border-radius:12px;padding:12px 14px;height:46px;resize:none;outline:none;color:#334247;font-size:14px}
 .send{width:44px;height:38px;border:none;border-radius:10px;background:#00313C;color:#fff;cursor:pointer}
 .input-meta{display:flex;justify-content:space-between;font-size:11px;color:#9b8f84;margin-top:6px}
-
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:24px;z-index:50}
-.modal.show{display:flex}
-.modal-card{background:#fff;color:#24353b;width:min(860px,96vw);max-height:86vh;overflow:auto;border-radius:18px}
-.modal-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid #ece4da}
-.modal-head h3{margin:0;font-family:Georgia,serif;font-size:28px}
-.modal-body{padding:18px 20px}
-.loader{display:flex;justify-content:center;align-items:center;padding:32px;color:#7e8f96}
-.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
-.metric{background:#f4efe9;border-radius:12px;padding:14px;text-align:center}
-.metric strong{display:block;font-size:28px;color:var(--deep)}
-.metric span{font-size:12px;color:#7b8c93}
-
-@media(max-width:1200px){
-  .body{grid-template-columns:240px 1fr 250px}
-  .hero h1{font-size:58px}
-}
-@media(max-width:960px){
-  .grid{grid-template-columns:1fr}
-  .body{grid-template-columns:1fr}
-  .left,.right{display:none}
-}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:24px;z-index:50}.modal.show{display:flex}
+.modal-card{background:#fff;color:#24353b;width:min(860px,96vw);max-height:86vh;overflow:auto;border-radius:18px}.modal-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid #ece4da}.modal-head h3{margin:0;font-family:Georgia,serif;font-size:28px}.modal-body{padding:18px 20px}.loader{display:flex;justify-content:center;align-items:center;padding:32px;color:#7e8f96}
+.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.metric{background:#f4efe9;border-radius:12px;padding:14px;text-align:center}.metric strong{display:block;font-size:28px;color:var(--deep)}.metric span{font-size:12px;color:#7b8c93}
+@media(max-width:1200px){.body{grid-template-columns:240px 1fr 250px}.hero h1{font-size:58px}}
+@media(max-width:960px){.grid{grid-template-columns:1fr}.body{grid-template-columns:1fr}.left,.right{display:none}}
 </style>
 </head>
 <body>
@@ -182,50 +125,19 @@ button,input,textarea{font:inherit}
   <div class="subbar" id="simSub">Subtitle</div>
   <div class="body">
     <div class="left">
-      <div class="panel-sec">
-        <div class="panel-lbl">AI Is Playing</div>
-        <div class="persona-box">
-          <h4 id="leftName">Name</h4>
-          <p id="leftRole">Role</p>
-        </div>
-      </div>
-      <div class="panel-sec">
-        <div class="panel-lbl">Situation</div>
-        <p id="leftSituation"></p>
-      </div>
-      <div class="panel-sec">
-        <div class="panel-lbl">Your Objective</div>
-        <p class="objective" id="leftObjective"></p>
-      </div>
-      <div class="panel-sec">
-        <div class="panel-lbl">4C Dimensions Tested</div>
-        <div class="dim-pills" id="leftDims"></div>
-      </div>
-      <div class="panel-sec">
-        <div class="panel-lbl">Conversation Stage</div>
-        <div class="dim-pill" id="stagePill">Opening</div>
-      </div>
+      <div class="panel-sec"><div class="panel-lbl">AI Is Playing</div><div class="persona-box"><h4 id="leftName"></h4><p id="leftRole"></p></div></div>
+      <div class="panel-sec"><div class="panel-lbl">Situation</div><p id="leftSituation"></p></div>
+      <div class="panel-sec"><div class="panel-lbl">Your Objective</div><p class="objective" id="leftObjective"></p></div>
+      <div class="panel-sec"><div class="panel-lbl">4C Dimensions Tested</div><div class="dim-pills" id="leftDims"></div></div>
+      <div class="panel-sec"><div class="panel-lbl">Conversation Stage</div><div class="dim-pill" id="stagePill">Opening</div></div>
       <div class="panel-sec">
         <div class="panel-lbl">Live Simulation Signals</div>
-        <div class="signal">
-          <div class="signal-head"><span>Trust</span><span id="trustVal">32%</span></div>
-          <div class="bar"><div id="trustBar" style="width:32%;background:var(--good)"></div></div>
-        </div>
-        <div class="signal">
-          <div class="signal-head"><span>Resistance</span><span id="resVal">68%</span></div>
-          <div class="bar"><div id="resBar" style="width:68%;background:var(--warn)"></div></div>
-        </div>
-        <div class="signal">
-          <div class="signal-head"><span>Coaching Readiness</span><span id="readyVal">24%</span></div>
-          <div class="bar"><div id="readyBar" style="width:24%;background:#efc46a"></div></div>
-        </div>
+        <div class="signal"><div class="signal-head"><span>Trust</span><span id="trustVal">32%</span></div><div class="bar"><div id="trustBar" style="width:32%;background:var(--good)"></div></div></div>
+        <div class="signal"><div class="signal-head"><span>Resistance</span><span id="resVal">68%</span></div><div class="bar"><div id="resBar" style="width:68%;background:var(--warn)"></div></div></div>
+        <div class="signal"><div class="signal-head"><span>Coaching Readiness</span><span id="readyVal">24%</span></div><div class="bar"><div id="readyBar" style="width:24%;background:#efc46a"></div></div></div>
       </div>
-      <div class="panel-sec">
-        <div class="panel-lbl">Tips</div>
-        <div class="tip-list" id="tipList"></div>
-      </div>
+      <div class="panel-sec"><div class="panel-lbl">Tips</div><div class="tip-list" id="tipList"></div></div>
     </div>
-
     <div class="center">
       <div class="msgs" id="msgs"></div>
       <div class="input-wrap">
@@ -234,13 +146,9 @@ button,input,textarea{font:inherit}
           <textarea id="inp" placeholder="Type your response as the manager..." oninput="autoGrow()" onkeydown="handleKey(event)"></textarea>
           <button class="send" onclick="sendMsg()">➤</button>
         </div>
-        <div class="input-meta">
-          <span>Enter to send · Shift+Enter new line</span>
-          <span id="apiStat">Checking AI…</span>
-        </div>
+        <div class="input-meta"><span>Enter to send · Shift+Enter new line</span><span id="apiStat">Checking AI…</span></div>
       </div>
     </div>
-
     <div class="right" id="observer">
       <div class="panel-sec">
         <div class="obs-title">Observer Checklist</div>
@@ -248,10 +156,7 @@ button,input,textarea{font:inherit}
         <div id="obsList"></div>
         <div class="sugg-label">AI Suggestions</div>
         <div class="sugg-copy" id="obsHint">No suggestions yet.</div>
-        <div class="score-box">
-          <div class="big"><span id="obsScore">0</span>/<span id="obsTotal">6</span></div>
-          <div class="small">behaviors demonstrated</div>
-        </div>
+        <div class="score-box"><div class="big"><span id="obsScore">0</span>/<span id="obsTotal">6</span></div><div class="small">behaviors demonstrated</div></div>
       </div>
     </div>
   </div>
@@ -259,10 +164,7 @@ button,input,textarea{font:inherit}
 
 <div class="modal" id="coachModal">
   <div class="modal-card">
-    <div class="modal-head">
-      <h3>Coaching Feedback</h3>
-      <button class="h-btn" onclick="closeCoaching()">Close</button>
-    </div>
+    <div class="modal-head"><h3>Coaching Feedback</h3><button class="h-btn" onclick="closeCoaching()">Close</button></div>
     <div class="modal-body" id="coachBody"><div class="loader">Analysing your coaching conversation…</div></div>
   </div>
 </div>
@@ -273,26 +175,14 @@ const SCENARIOS = [
     num:"01",
     title:"The Dependent Coordinator",
     sub:"Coaching a capable employee who still checks every decision upward",
-    tag1:"Coaching",
-    tag2:"Ownership",
+    tag1:"Coaching", tag2:"Ownership",
     aiRole:"Noura Al-Salem",
     roleDesc:"Marketplace Coordinator · 11 months at Floward · careful, reliable, and overly dependent on manager approval",
     situation:"Noura is dependable and detail-oriented, but she keeps asking for approval on routine marketplace adjustments, seller follow-ups, and minor listing decisions. During Mother’s Day prep, this is slowing the entire team down. She is not low-performing. She just does not fully trust her own judgement yet.",
     objective:"Coach Noura toward ownership. Build confidence without rescuing or simply giving her the answer.",
     dims:["C1 Clarity","C2 Consistency","C4 Care"],
-    tips:[
-      "Ask how she is currently deciding before you tell her how to decide",
-      "Help her name the principle, not just the answer to one case",
-      "End with one boundary for what she can decide without checking"
-    ],
-    checklist:[
-      "Manager asked questions before giving guidance",
-      "Manager helped Noura articulate her own thinking",
-      "Manager named one clear ownership boundary",
-      "Manager did not immediately solve the issue for her",
-      "Manager reinforced confidence without empty reassurance",
-      "Manager ended with a practical next-step agreement"
-    ],
+    tips:["Ask how she is currently deciding before you tell her how to decide","Help her name the principle, not just the answer to one case","End with one boundary for what she can decide without checking"],
+    checklist:["Manager asked questions before giving guidance","Manager helped Noura articulate her own thinking","Manager named one clear ownership boundary","Manager did not immediately solve the issue for her","Manager reinforced confidence without empty reassurance","Manager ended with a practical next-step agreement"],
     systemPrompt:`You are Noura Al-Salem, a Marketplace Coordinator at Floward. You are careful, hardworking, and genuinely want to do a good job. You have 11 months of experience and you often double-check decisions with your manager because you are afraid of making a visible mistake during a peak campaign cycle.
 
 YOUR OPENING LINE: "Can I check something small with you before I reply to the seller? I think I know what to do, I just do not want to make the wrong call during Mother's Day."
@@ -304,7 +194,6 @@ COACHING DYNAMICS:
 - If the manager helps you create a decision principle, you become more ready to act independently.
 
 SUCCESS: If the manager helps you reason through it, names what you can decide alone next time, and reinforces that boundary, say: "Okay, that actually helps. So next time if it fits that rule, I do not need to check with you first."
-
 FAILURE: If the manager just tells you what to do, say: "Got it. I will do that. I might just check again next time to be safe."
 
 Keep responses to 2-4 natural sentences. You are cautious, not resistant.`,
@@ -314,26 +203,14 @@ Keep responses to 2-4 natural sentences. You are cautious, not resistant.`,
     num:"02",
     title:"The Strong Performer Who Is Slipping",
     sub:"Addressing a recent performance dip without flattening confidence",
-    tag1:"Performance",
-    tag2:"Coaching",
+    tag1:"Performance", tag2:"Coaching",
     aiRole:"Fahad Al-Mutairi",
     roleDesc:"Fulfilment Supervisor · 2.5 years at Floward · previously strong performer, recently inconsistent during peak prep",
     situation:"Fahad used to be one of your most dependable fulfilment supervisors. Over the past three weeks, though, stand-up updates have become vague, two shifts missed handover notes, and stock-prep errors increased before the Eid push. He still sees himself as one of the strongest people on the floor, and he is not wrong historically.",
     objective:"Address the recent dip honestly, understand what changed, and coach Fahad back to ownership without attacking his identity as a strong performer.",
     dims:["C1 Clarity","C3 Credibility","C4 Care"],
-    tips:[
-      "Separate the recent pattern from his full identity",
-      "Name the observed shift with specific examples",
-      "Coach toward ownership of the recovery plan, not just agreement with the feedback"
-    ],
-    checklist:[
-      "Manager named the recent pattern with specifics",
-      "Manager did not label Fahad as generally weak",
-      "Manager asked what changed before prescribing the fix",
-      "Manager held accountability without softening the issue away",
-      "Manager involved Fahad in the recovery plan",
-      "Manager ended with a clear follow-up checkpoint"
-    ],
+    tips:["Separate the recent pattern from his full identity","Name the observed shift with specific examples","Coach toward ownership of the recovery plan, not just agreement with the feedback"],
+    checklist:["Manager named the recent pattern with specifics","Manager did not label Fahad as generally weak","Manager asked what changed before prescribing the fix","Manager held accountability without softening the issue away","Manager involved Fahad in the recovery plan","Manager ended with a clear follow-up checkpoint"],
     systemPrompt:`You are Fahad Al-Mutairi, a Fulfilment Supervisor at Floward. For over two years, you have been one of the strongest operators in the team. Recently, though, you have slipped: missed handover notes, vague stand-ups, and more prep mistakes during peak readiness. You know something is off, but you do not want to be spoken to like an underperformer.
 
 YOUR OPENING LINE: "I saw the meeting note and figured this was about the last few weeks. I know things have not been at my usual level, but I do not want this turned into a story that I suddenly cannot do the role."
@@ -345,7 +222,6 @@ COACHING DYNAMICS:
 - If the manager includes you in fixing it, you respond well.
 
 SUCCESS: If the manager separates the person from the pattern, names specifics, and gets you to co-own a reset plan, say: "Fair. I can see that. Let me tell you where it started slipping and what I think I need to tighten first."
-
 FAILURE: If the manager is vague or patronising, say: "So am I being told I am a problem now, or is there actually something specific you want me to fix?"
 
 Keep responses to 2-4 natural sentences. You are proud, slightly guarded, but coachable.`,
@@ -355,26 +231,14 @@ Keep responses to 2-4 natural sentences. You are proud, slightly guarded, but co
     num:"03",
     title:"The High Potential Stretch Conversation",
     sub:"Stretching a promising specialist without overwhelming or losing them",
-    tag1:"Growth",
-    tag2:"Potential",
+    tag1:"Growth", tag2:"Potential",
     aiRole:"Lina Khoury",
     roleDesc:"Customer Experience Specialist · 18 months at Floward · high judgement, strong customer empathy, ready for more",
     situation:"Lina consistently handles difficult customer cases well and often spots service-pattern issues before others do. You think she is ready to lead a small service-improvement workstream before Valentine’s planning starts. She has potential, but she is not yet fully sure she is leadership material.",
     objective:"Stretch Lina into broader ownership. Make the opportunity clear, meaningful, and achievable so she steps toward it rather than shrinking away from it.",
     dims:["C1 Clarity","C3 Credibility","C4 Care"],
-    tips:[
-      "Name the evidence behind the stretch opportunity",
-      "Be specific about scope so it feels real, not vague praise",
-      "Create challenge with support, not pressure with ambiguity"
-    ],
-    checklist:[
-      "Manager named the evidence for Lina's potential",
-      "Manager described the stretch opportunity clearly",
-      "Manager made the first step feel achievable",
-      "Manager did not oversell with vague praise",
-      "Manager asked Lina what support she would need",
-      "Manager ended with a concrete development next step"
-    ],
+    tips:["Name the evidence behind the stretch opportunity","Be specific about scope so it feels real, not vague praise","Create challenge with support, not pressure with ambiguity"],
+    checklist:["Manager named the evidence for Lina's potential","Manager described the stretch opportunity clearly","Manager made the first step feel achievable","Manager did not oversell with vague praise","Manager asked Lina what support she would need","Manager ended with a concrete development next step"],
     systemPrompt:`You are Lina Khoury, a Customer Experience Specialist at Floward. You are strong with difficult customer cases, thoughtful, and quietly influential. Your manager wants to stretch you into a broader service-improvement role, but you are not fully sure you are ready. You are interested, but you do not want to fail publicly.
 
 YOUR OPENING LINE: "I was surprised you wanted to talk about growth. I am interested, but I am also trying to understand what exactly you think I am ready for."
@@ -386,7 +250,6 @@ COACHING DYNAMICS:
 - If the manager asks what support you would need, you feel safer stepping forward.
 
 SUCCESS: If the manager explains the stretch role clearly, gives evidence, and makes the first step specific and supported, say: "That sounds more real when you explain it that way. I think I could try that if we agree what the first milestone looks like."
-
 FAILURE: If the manager is generic or too broad, say: "I appreciate that, but I still do not actually know what you are asking me to own."
 
 Keep responses to 2-4 natural sentences. You are thoughtful, modest, and quietly ambitious.`,
@@ -394,209 +257,108 @@ Keep responses to 2-4 natural sentences. You are thoughtful, modest, and quietly
   }
 ];
 
-let cur=null, hist=[], checks={}, micOn=false, rec=null, speaking=null;
+let cur=null, hist=[], checks={}, micOn=false, rec=null, finalTranscript='', interimTranscript='';
 let signals={trust:32,resistance:68,readiness:24};
 
-const msgs = document.getElementById('msgs');
-const grid = document.getElementById('grid');
+const msgs=document.getElementById('msgs'), grid=document.getElementById('grid');
 
 function renderCards(){
-  grid.innerHTML = SCENARIOS.map((s,i)=>`
-    <div class="card">
-      <div class="card-top">
-        <div class="card-num">${s.num}</div>
-        <div class="card-tags"><span class="tag">${s.tag1}</span><span class="tag">${s.tag2}</span></div>
-      </div>
-      <h3>${s.title}</h3>
-      <div class="sub">${s.sub}</div>
-      <div class="goal">${s.objective}</div>
-      <div class="persona">
-        <strong>${s.aiRole}</strong>
-        <span>${s.roleDesc}</span>
-      </div>
-      <button class="start-btn" onclick="openSim(${i})">Start Simulation →</button>
-    </div>
-  `).join('');
+  grid.innerHTML=SCENARIOS.map((s,i)=>`<div class="card"><div class="card-top"><div class="card-num">${s.num}</div><div class="card-tags"><span class="tag">${s.tag1}</span><span class="tag">${s.tag2}</span></div></div><h3>${s.title}</h3><div class="sub">${s.sub}</div><div class="goal">${s.objective}</div><div class="persona"><strong>${s.aiRole}</strong><span>${s.roleDesc}</span></div><button class="start-btn" onclick="openSim(${i})">Start Simulation →</button></div>`).join('');
 }
-
-function initials(name){
-  return name.split(' ').map(x=>x[0]).slice(0,2).join('').toUpperCase();
-}
-function stageLabel(turns){
-  if(turns <= 1) return 'Opening';
-  if(turns <= 3) return 'Exploring';
-  if(turns <= 5) return 'Alignment';
-  return 'Commitment';
-}
+function initials(name){return name.split(' ').map(x=>x[0]).slice(0,2).join('').toUpperCase();}
+function stageLabel(turns){if(turns<=1) return 'Opening'; if(turns<=3) return 'Exploring'; if(turns<=5) return 'Alignment'; return 'Commitment';}
 function updateSignals(userText=''){
-  const lower = userText.toLowerCase();
-  const coaching = ['what do you think','how do you see','what changed','what support','what would help','what is making','what makes','walk me through'];
-  const solvey = ['just do','you should','the answer is','here is what to do','simply','i need you to'];
-  const affirm = ['i can see','that makes sense','you have done well','i appreciate','you are right'];
-  if(coaching.some(p=>lower.includes(p))) { signals.trust += 6; signals.readiness += 8; signals.resistance -= 8; }
-  if(solvey.some(p=>lower.includes(p))) { signals.trust -= 2; signals.readiness -= 6; signals.resistance += 8; }
-  if(affirm.some(p=>lower.includes(p))) { signals.trust += 4; signals.resistance -= 3; }
-  signals.trust = Math.max(8, Math.min(92, signals.trust));
-  signals.resistance = Math.max(8, Math.min(92, signals.resistance));
-  signals.readiness = Math.max(8, Math.min(92, signals.readiness));
-  document.getElementById('trustVal').textContent = signals.trust + '%';
-  document.getElementById('resVal').textContent = signals.resistance + '%';
-  document.getElementById('readyVal').textContent = signals.readiness + '%';
-  document.getElementById('trustBar').style.width = signals.trust + '%';
-  document.getElementById('resBar').style.width = signals.resistance + '%';
-  document.getElementById('readyBar').style.width = signals.readiness + '%';
-  document.getElementById('obsHint').textContent = signals.resistance > 60
-    ? 'Ask one more coaching question before offering your view.'
-    : signals.readiness > 55
-      ? 'Move toward a concrete next step and support boundary.'
-      : 'Stay specific and keep the focus on their thinking.';
+  const lower=userText.toLowerCase();
+  const coaching=['what do you think','how do you see','what changed','what support','what would help','what is making','what makes','walk me through'];
+  const solvey=['just do','you should','the answer is','here is what to do','simply','i need you to'];
+  const affirm=['i can see','that makes sense','you have done well','i appreciate','you are right'];
+  if(coaching.some(p=>lower.includes(p))) { signals.trust+=6; signals.readiness+=8; signals.resistance-=8; }
+  if(solvey.some(p=>lower.includes(p))) { signals.trust-=2; signals.readiness-=6; signals.resistance+=8; }
+  if(affirm.some(p=>lower.includes(p))) { signals.trust+=4; signals.resistance-=3; }
+  signals.trust=Math.max(8,Math.min(92,signals.trust)); signals.resistance=Math.max(8,Math.min(92,signals.resistance)); signals.readiness=Math.max(8,Math.min(92,signals.readiness));
+  trustVal.textContent=signals.trust+'%'; resVal.textContent=signals.resistance+'%'; readyVal.textContent=signals.readiness+'%';
+  trustBar.style.width=signals.trust+'%'; resBar.style.width=signals.resistance+'%'; readyBar.style.width=signals.readiness+'%';
+  obsHint.textContent = signals.resistance > 60 ? 'Ask one more coaching question before offering your view.' :
+                        signals.readiness > 55 ? 'Move toward a concrete next step and support boundary.' :
+                        'Stay specific and keep the focus on their thinking.';
 }
 function renderObs(){
-  const list = document.getElementById('obsList');
-  document.getElementById('obsTotal').textContent = cur.checklist.length;
-  list.innerHTML = cur.checklist.map((txt,i)=>`
-    <div class="obs-item">
-      <div class="obs-check ${checks[i]?'checked':''}" onclick="toggleCheck(${i})">${checks[i]?'✓':''}</div>
-      <div class="obs-text">${txt}</div>
-    </div>
-  `).join('');
-  document.getElementById('obsScore').textContent = Object.values(checks).filter(Boolean).length;
+  obsTotal.textContent=cur.checklist.length;
+  obsList.innerHTML=cur.checklist.map((txt,i)=>`<div class="obs-item"><div class="obs-check ${checks[i]?'checked':''}" onclick="toggleCheck(${i})">${checks[i]?'✓':''}</div><div class="obs-text">${txt}</div></div>`).join('');
+  obsScore.textContent=Object.values(checks).filter(Boolean).length;
 }
-function toggleCheck(i){ checks[i] = !checks[i]; renderObs(); }
-
+function toggleCheck(i){checks[i]=!checks[i]; renderObs();}
 function renderLeft(){
-  document.getElementById('leftName').textContent = cur.aiRole;
-  document.getElementById('leftRole').textContent = cur.roleDesc;
-  document.getElementById('leftSituation').textContent = cur.situation;
-  document.getElementById('leftObjective').textContent = cur.objective;
-  document.getElementById('leftDims').innerHTML = cur.dims.map(d=>`<span class="dim-pill">${d}</span>`).join('');
-  document.getElementById('tipList').innerHTML = cur.tips.map(t=>`<div class="tip">→ ${t}</div>`).join('');
+  leftName.textContent=cur.aiRole; leftRole.textContent=cur.roleDesc; leftSituation.textContent=cur.situation; leftObjective.textContent=cur.objective;
+  leftDims.innerHTML=cur.dims.map(d=>`<span class="dim-pill">${d}</span>`).join('');
+  tipList.innerHTML=cur.tips.map(t=>`<div class="tip">→ ${t}</div>`).join('');
 }
 function openSim(i){
-  cur = SCENARIOS[i];
-  hist = [];
-  checks = {};
-  signals = {trust:32,resistance:68,readiness:24};
-  document.getElementById('landing').style.display = 'none';
-  document.getElementById('sim').style.display = 'block';
-  document.getElementById('simNum').textContent = 'Simulation ' + cur.num;
-  document.getElementById('simTitle').textContent = cur.title;
-  document.getElementById('simSub').textContent = cur.sub;
-  msgs.innerHTML = '';
-  renderLeft();
-  renderObs();
-  updateSignals('');
-  document.getElementById('stagePill').textContent = 'Opening';
-  setApiStatus('Checking AI…');
-  fetch('/api/chat?ping=1').then(()=>setApiStatus('AI connected · Ready')).catch(()=>setApiStatus('Connection issue'));
-  const opener = (cur.systemPrompt.match(/YOUR OPENING LINE: "([\s\S]*?)"/)||[])[1] || "Let's talk.";
-  setTimeout(()=>{
-    addAI(cur.aiRole, opener, cur.voiceGender);
-    hist.push({role:'assistant', content: opener});
-  }, 250);
+  cur=SCENARIOS[i]; hist=[]; checks={}; finalTranscript=''; interimTranscript=''; signals={trust:32,resistance:68,readiness:24};
+  landing.style.display='none'; sim.style.display='block'; simNum.textContent='Simulation '+cur.num; simTitle.textContent=cur.title; simSub.textContent=cur.sub; msgs.innerHTML='';
+  renderLeft(); renderObs(); updateSignals(''); stagePill.textContent='Opening';
+  setApiStatus('Checking AI…'); fetch('/api/chat?ping=1').then(()=>setApiStatus('AI connected · Ready')).catch(()=>setApiStatus('Connection issue'));
+  const opener=(cur.systemPrompt.match(/YOUR OPENING LINE: "([\s\S]*?)"/)||[])[1]||"Let's talk.";
+  setTimeout(()=>{ addAI(cur.aiRole, opener, cur.voiceGender); hist.push({role:'assistant',content:opener}); }, 250);
 }
-function goBack(){
-  stopSpeaking();
-  stopMic(true);
-  document.getElementById('sim').style.display = 'none';
-  document.getElementById('landing').style.display = 'block';
-}
-function setApiStatus(text){ document.getElementById('apiStat').textContent = text; }
-function escapeHtml(s){ return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-
-function addAI(name, text, gender='female'){
-  const row = document.createElement('div');
-  row.className = 'msg-row';
-  row.innerHTML = `
-    <div class="avatar">${initials(name)}</div>
-    <div class="msg-wrap">
-      <div class="msg-name">${escapeHtml(name)} <button class="spk" title="Listen">🔊</button></div>
-      <div class="msg-bubble">${escapeHtml(text)}</div>
-    </div>`;
-  const btn = row.querySelector('.spk');
-  btn.onclick = () => speakText(text, gender, btn);
-  msgs.appendChild(row);
-  msgs.scrollTop = msgs.scrollHeight;
+function goBack(){ stopSpeaking(); stopMic(true,false); sim.style.display='none'; landing.style.display='block'; }
+function setApiStatus(text){ apiStat.textContent=text; }
+function escapeHtml(s){ return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function addAI(name,text,gender='female'){
+  const row=document.createElement('div'); row.className='msg-row';
+  row.innerHTML=`<div class="avatar">${initials(name)}</div><div class="msg-wrap"><div class="msg-name">${escapeHtml(name)} <button class="spk" title="Listen">🔊</button></div><div class="msg-bubble">${escapeHtml(text)}</div></div>`;
+  row.querySelector('.spk').onclick=()=>speakText(text,gender,row.querySelector('.spk'));
+  msgs.appendChild(row); msgs.scrollTop=msgs.scrollHeight;
 }
 function addUser(text){
-  const row = document.createElement('div');
-  row.className = 'msg user';
-  row.innerHTML = `
-    <div class="msg-wrap">
-      <div class="msg-name">You</div>
-      <div class="msg-bubble">${escapeHtml(text)}</div>
-    </div>`;
-  msgs.appendChild(row);
-  msgs.scrollTop = msgs.scrollHeight;
+  const row=document.createElement('div'); row.className='msg user';
+  row.innerHTML=`<div class="msg-wrap"><div class="msg-name">You</div><div class="msg-bubble">${escapeHtml(text)}</div></div>`;
+  msgs.appendChild(row); msgs.scrollTop=msgs.scrollHeight;
 }
-function showTyping(){
-  const t = document.createElement('div');
-  t.className = 'typing';
-  t.id='typing';
-  t.style.display='block';
-  t.textContent = 'AI is responding…';
-  msgs.appendChild(t);
-  msgs.scrollTop = msgs.scrollHeight;
-}
+function showTyping(){ const t=document.createElement('div'); t.className='typing'; t.id='typing'; t.style.display='block'; t.textContent='AI is responding…'; msgs.appendChild(t); msgs.scrollTop=msgs.scrollHeight; }
 function hideTyping(){ const t=document.getElementById('typing'); if(t) t.remove(); }
-
-async function sendMsg(){
+async function sendMsg(forceText){
   if(!cur) return;
-  const inp = document.getElementById('inp');
-  const text = inp.value.trim();
+  const text=(forceText || inp.value || '').trim();
   if(!text) return;
-  stopMic(true);
-  addUser(text);
-  hist.push({role:'user', content:text});
-  inp.value = '';
-  inp.style.height = '46px';
-  updateSignals(text);
-  document.getElementById('stagePill').textContent = stageLabel(hist.filter(x=>x.role==='user').length);
-  showTyping();
+  stopMic(true,false);
+  addUser(text); hist.push({role:'user',content:text}); inp.value=''; inp.style.height='46px'; finalTranscript=''; interimTranscript='';
+  updateSignals(text); stagePill.textContent=stageLabel(hist.filter(x=>x.role==='user').length); showTyping();
   try{
-    const body = {
+    const body={
       model:"claude-3-5-sonnet-latest",
-      max_tokens:500,
-      system: cur.systemPrompt + "\n\nYou are in a Week 9 coaching simulation at Floward. Stay in character. Reward real coaching. Resist solutions given too early. Keep replies to 2-4 sentences.",
+      max_tokens:550,
+      system: cur.systemPrompt + `
+
+You are in a Week 9 Floward coaching simulation.
+Core rules:
+- Stay fully in character.
+- Reply with logical, smart, realistic coaching responses.
+- Do not agree too quickly.
+- Reward real coaching questions, ownership-building, and specificity.
+- Challenge vague reassurance, instant problem-solving, and soft avoidance.
+- Keep replies to 2-4 concise natural sentences.
+- Sound like a real Floward employee in a coaching conversation, not a generic chatbot.`,
       messages: hist.map(m=>({role:m.role==='assistant'?'assistant':'user', content:m.content}))
     };
-    const res = await fetch('/api/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
-    const data = await res.json();
-    hideTyping();
-    const reply = data.content?.[0]?.text || data.reply || 'I need a bit more clarity from you.';
-    addAI(cur.aiRole, reply, cur.voiceGender);
-    hist.push({role:'assistant', content:reply});
-    setApiStatus('AI connected · Ready');
+    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const data=await res.json(); hideTyping();
+    const reply=data.content?.[0]?.text || data.reply || 'I still need a clearer coaching response from you. Can you be more specific?';
+    addAI(cur.aiRole, reply, cur.voiceGender); hist.push({role:'assistant',content:reply}); setApiStatus('AI connected · Ready');
   }catch(e){
-    hideTyping();
-    addAI(cur.aiRole, 'I did not catch that clearly. Try once more and be specific.', cur.voiceGender);
-    setApiStatus('Connection issue');
+    hideTyping(); addAI(cur.aiRole,'I still need a clearer coaching response from you. Can you be more specific?',cur.voiceGender); setApiStatus('Connection issue');
   }
 }
-function autoGrow(){
-  const inp = document.getElementById('inp');
-  inp.style.height='46px';
-  inp.style.height = Math.min(inp.scrollHeight, 120) + 'px';
-}
-function handleKey(e){
-  if(e.key==='Enter' && !e.shiftKey){
-    e.preventDefault();
-    sendMsg();
-  }
-}
-
-function toggleObserver(){
-  const el = document.getElementById('observer');
-  el.style.display = el.style.display === 'none' ? 'block' : 'none';
-}
-
-function closeCoaching(){ document.getElementById('coachModal').classList.remove('show'); }
+function autoGrow(){ inp.style.height='46px'; inp.style.height=Math.min(inp.scrollHeight,120)+'px'; }
+function handleKey(e){ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendMsg(); } }
+function toggleObserver(){ observer.style.display=observer.style.display==='none'?'block':'none'; }
+function closeCoaching(){ coachModal.classList.remove('show'); }
 async function getCoaching(){
-  if(!cur || hist.length < 4){ alert('Have at least 2-3 exchanges first.'); return; }
-  document.getElementById('coachModal').classList.add('show');
-  document.getElementById('coachBody').innerHTML = '<div class="loader">Analysing your coaching conversation…</div>';
-  const conv = hist.map(m => `${m.role==='user'?'MANAGER':'AI'}: ${m.content}`).join('\n\n');
-  const prompt = `You are an executive leadership coach at Floward. Analyse this Week 9 coaching simulation.
+  if(!cur || hist.length<4){ alert('Have at least 2-3 exchanges first.'); return; }
+  coachModal.classList.add('show');
+  coachBody.innerHTML='<div class="loader">Analysing your coaching conversation…</div>';
+  const conv=hist.map(m=>`${m.role==='user'?'MANAGER':'AI'}: ${m.content}`).join('\n\n');
+  const prompt=`You are an executive leadership coach at Floward. Analyse this Week 9 coaching simulation.
 
 SCENARIO: ${cur.title}
 OBJECTIVE: ${cur.objective}
@@ -618,73 +380,76 @@ Return concise HTML with:
 <h3>The Critical Gap</h3><p>Most important improvement.</p>
 <h3>Best Next Move</h3><p>Exactly what to say or do next.</p>`;
   try{
-    const res = await fetch('/api/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({
-      model:"claude-3-5-sonnet-latest", max_tokens:800, messages:[{role:'user', content:prompt}]
-    })});
-    const data = await res.json();
-    document.getElementById('coachBody').innerHTML = data.content?.[0]?.text || data.reply || '<p>Unable to generate feedback.</p>';
-  }catch(e){
-    document.getElementById('coachBody').innerHTML = '<p>Unable to generate feedback right now.</p>';
-  }
+    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:"claude-3-5-sonnet-latest",max_tokens:800,messages:[{role:'user',content:prompt}]})});
+    const data=await res.json();
+    coachBody.innerHTML=data.content?.[0]?.text || data.reply || '<p>Unable to generate feedback.</p>';
+  }catch(e){ coachBody.innerHTML='<p>Unable to generate feedback right now.</p>'; }
 }
-
-// speech
 function pickVoice(gender){
-  const voices = speechSynthesis.getVoices();
-  const femaleHints = ['female','woman','zira','aria','samantha','ava','serena','victoria'];
-  const maleHints = ['male','man','david','mark','daniel','alex'];
-  const pool = voices.filter(v => /en/i.test(v.lang || ''));
-  const hints = gender === 'male' ? maleHints : femaleHints;
-  return pool.find(v => hints.some(h => (v.name||'').toLowerCase().includes(h))) || pool[0] || voices[0] || null;
+  const voices=speechSynthesis.getVoices();
+  const femaleHints=['female','woman','zira','aria','samantha','ava','serena','victoria'];
+  const maleHints=['male','man','david','mark','daniel','alex'];
+  const pool=voices.filter(v=>/en/i.test(v.lang||''));
+  const hints=gender==='male'?maleHints:femaleHints;
+  return pool.find(v=>hints.some(h=>(v.name||'').toLowerCase().includes(h))) || pool[0] || voices[0] || null;
 }
-function stopSpeaking(){
-  if(window.speechSynthesis.speaking) window.speechSynthesis.cancel();
-  document.querySelectorAll('.spk.playing').forEach(b=>b.classList.remove('playing'));
-}
-function speakText(text, gender, btn){
-  if(window.speechSynthesis.speaking){ stopSpeaking(); if(btn.classList.contains('playing')) return; }
-  const u = new SpeechSynthesisUtterance(text);
-  const voice = pickVoice(gender);
-  if(voice) u.voice = voice;
-  u.rate = 1; u.pitch = 1;
-  btn.classList.add('playing');
-  u.onend = ()=>btn.classList.remove('playing');
-  u.onerror = ()=>btn.classList.remove('playing');
-  speaking = u;
+function stopSpeaking(){ if(window.speechSynthesis.speaking) window.speechSynthesis.cancel(); document.querySelectorAll('.spk.playing').forEach(b=>b.classList.remove('playing')); }
+function speakText(text,gender,btn){
+  if(window.speechSynthesis.speaking){ stopSpeaking(); }
+  const u=new SpeechSynthesisUtterance(text); const voice=pickVoice(gender); if(voice) u.voice=voice;
+  btn.classList.add('playing'); u.onend=()=>btn.classList.remove('playing'); u.onerror=()=>btn.classList.remove('playing');
   window.speechSynthesis.speak(u);
 }
-speechSynthesis.onvoiceschanged = ()=>{};
-
-// mic
-function stopMic(silent){
-  if(rec){ try{ rec.onend = null; rec.stop(); rec.abort && rec.abort(); }catch(e){} rec=null; }
-  micOn=false;
-  document.getElementById('micBtn').classList.remove('on');
-  if(!silent) document.getElementById('inp').focus();
+speechSynthesis.onvoiceschanged=()=>{};
+function stopMic(silent, clearInput){
+  if(rec){
+    try{
+      rec.onend=null;
+      rec.stop();
+      if(rec.abort) rec.abort();
+    }catch(e){}
+  }
+  rec=null; micOn=false; micBtn.classList.remove('on');
+  if(clearInput){ finalTranscript=''; interimTranscript=''; inp.value=''; autoGrow(); }
+  if(!silent) inp.focus();
+}
+function formatTranscript(text){
+  let t=(text||'').trim().replace(/\s+/g,' ');
+  if(!t) return '';
+  t=t.charAt(0).toUpperCase()+t.slice(1);
+  if(!/[.!?]$/.test(t)) t+='.';
+  return t;
 }
 function toggleMic(){
   if(!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)){ alert('Microphone is not supported in this browser.'); return; }
-  if(micOn){ stopMic(); return; }
+  if(micOn){
+    const finalText=formatTranscript((finalTranscript+' '+interimTranscript).trim());
+    stopMic(true,true);
+    if(finalText){ sendMsg(finalText); }
+    return;
+  }
   stopSpeaking();
-  document.getElementById('inp').value = '';
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  rec = new SR();
+  finalTranscript=''; interimTranscript='';
+  const SR=window.SpeechRecognition || window.webkitSpeechRecognition;
+  rec=new SR();
   rec.lang='en-US';
   rec.continuous=true;
   rec.interimResults=true;
-  micOn=true;
-  document.getElementById('micBtn').classList.add('on');
-  rec.onresult = (e)=>{
-    let transcript='';
-    for(let i=e.resultIndex;i<e.results.length;i++){ transcript += e.results[i][0].transcript; }
-    if(micOn) document.getElementById('inp').value = transcript.trim();
+  micOn=true; micBtn.classList.add('on');
+  rec.onresult=(e)=>{
+    interimTranscript='';
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      const piece=e.results[i][0].transcript.trim();
+      if(e.results[i].isFinal){ finalTranscript=(finalTranscript+' '+piece).trim(); }
+      else { interimTranscript=(interimTranscript+' '+piece).trim(); }
+    }
+    inp.value=[finalTranscript,interimTranscript].filter(Boolean).join(' ').trim();
     autoGrow();
   };
-  rec.onerror = ()=>stopMic(true);
-  rec.onend = ()=>{ if(micOn){ try{ rec.start(); }catch(e){} } };
+  rec.onerror=()=>stopMic(true,false);
+  rec.onend=()=>{ if(micOn){ try{ rec.start(); }catch(e){} } };
   rec.start();
 }
-
 renderCards();
 </script>
 </body>
